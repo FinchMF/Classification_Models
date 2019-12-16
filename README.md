@@ -147,5 +147,8 @@ The final model is Random Forest at max depth 10 with an accuracy of 80.4%
 
 # Next Steps
 
+ * Collect more data and further analyze where machine learning is less discriminate between like genres with lower dimensional features. 
+
+* In the field of ethnomusicology, use the model to observe and isolate characteristics of a region’s or culture’s musical profile.
 
 
