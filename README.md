@@ -6,20 +6,20 @@ For this project I wanted to build a multi-class classification model that could
 # Overview
 Using Spotify's API I called 14 different genres. These generes were: 
 
-50’s (2)
-Chill Hop (1)
-Classical  (3)
-Detroit Techno (1)
-Disco (4)
-Electronic (4)
-French (5)
-Hip Hop (1)
-Industrial Pop (4)
-Post Rock (3)
-Rockabilly (2)
-Ska (2)
-Sleep (3)
-Spanish (5)
+*50’s (2)
+*Chill Hop (1)
+*Classical  (3)
+*Detroit Techno (1)
+*Disco (4)
+*Electronic (4)
+*French (5)
+*Hip Hop (1)
+*Industrial Pop (4)
+*Post Rock (3)
+*Rockabilly (2)
+*Ska (2)
+*Sleep (3)
+*Spanish (5)
 
 For each genre I called 100 songs totalling 1,400 tracks. Each track is given a number. Tracks with the same number share common audio features. 
 
