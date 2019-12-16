@@ -49,7 +49,13 @@ While somewhat inaccurate and in need of improvement, the lower dimensional feat
       * Pitch of Segment (note) - (0-11)
       * TImbre of Segment (color) - (0 - 1)
 
-Three examples  of what a genere's musical profile based off the high dimensional features is below. 
+An example of what a genere's musical profile based off the high dimensional features is below. 
 ![50's Genre](https://github.com/FinchMF/Classification_Models/blob/master/graphs/EDA_50s_plots_1.png)
-![French Genre](https://github.com/FinchMF/Classification_Models/blob/master/graphs/EDA_french_plots_2.png)
-![Hip_hop](https://github.com/FinchMF/Classification_Models/blob/master/graphs/EDA_hip_hop_plots_3.png)
+
+# Musical Profiles that share common features
+
+Below is a graph showing three genres, Hip Hop, Chill Hop and Detroit Techno, that all share multiple common audio features. This particular graph is of the audio feature ENERGY and its distribution amoung the tracks within these three genres. 
+
+![Energy Distro](https://github.com/FinchMF/Classification_Models/blob/master/graphs/3_togt.png)
+
+
