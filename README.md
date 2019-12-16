@@ -138,3 +138,14 @@ This lead me to choosing the following 6 genres:
 # Base Model for 6 Classifiers
 
 ![base_model_6](https://github.com/FinchMF/Classification_Models/blob/master/graphs/base_model_6_cl.png)
+
+Notice that the noise is gone. 
+
+The final model is Random Forest at max depth 10 with an accuracy of 80.4%
+
+![random_forest-6](https://github.com/FinchMF/Classification_Models/blob/master/graphs/forest_model_6.png)
+
+# Next Steps
+
+
+
