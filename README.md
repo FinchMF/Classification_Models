@@ -27,27 +27,27 @@ For each genre I called 100 songs totalling 1,400 tracks. Each track is given a 
 
 Spotify returns both high dimesional and low dimensional audio features. The high dimensional features are: 
 
-Valence - (mood)
-Time Signature 
-Tempo
-Speechiness 
-Loudness
-Liveness 
-Key - (0-11)
-Mode (-1, 0, 1)
-Instrumentalness
-Energy
-Danceability
-Acousticness
+* Valence - (mood)
+* Time Signature 
+* Tempo
+* Speechiness 
+* Loudness
+* Liveness 
+* Key - (0-11)
+* Mode (-1, 0, 1)
+* Instrumentalness
+* Energy
+* Danceability
+* Acousticness
 
 While somewhat inaccurate and in need of improvement, the lower dimensional features are: 
 
-Sections
-  Tempo of Sections 
-  Key of Sections (harmony) (0 - 11)
-    Segments
-      Pitch of Segment (note) - (0-11)
-      TImbre of Segment (color) - (0 - 1)
+* Sections
+  * Tempo of Sections 
+  * Key of Sections (harmony) (0 - 11)
+    * Segments
+      * Pitch of Segment (note) - (0-11)
+      * TImbre of Segment (color) - (0 - 1)
 
 An example of what a genere's musical profile based off the high dimensional features is below. 
 
