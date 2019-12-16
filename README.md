@@ -58,4 +58,6 @@ Below is a graph showing three genres, Hip Hop, Chill Hop and Detroit Techno, th
 
 ![Energy Distro](https://github.com/FinchMF/Classification_Models/blob/master/graphs/3_togt.png)
 
+# Model Overview
 
+For a base model I used sklearn's Dummy Classifier
