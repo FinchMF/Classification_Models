@@ -49,5 +49,7 @@ While somewhat inaccurate and in need of improvement, the lower dimensional feat
       * Pitch of Segment (note) - (0-11)
       * TImbre of Segment (color) - (0 - 1)
 
-An example of what a genere's musical profile based off the high dimensional features is below. 
-
+Three examples  of what a genere's musical profile based off the high dimensional features is below. 
+![50's Genre](https://github.com/FinchMF/Classification_Models/blob/master/graphs/EDA_50s_plots_1.png)
+![French Genre](https://github.com/FinchMF/Classification_Models/blob/master/graphs/EDA_french_plots_2.png)
+![Hip_hop](https://github.com/FinchMF/Classification_Models/blob/master/graphs/EDA_hip_hop_plots_3.png)
