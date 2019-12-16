@@ -126,5 +126,15 @@ Unsatisfied with being able to pinpoint what the noise was, I decided to strip t
 
 ![difference](https://github.com/FinchMF/Classification_Models/blob/master/graphs/2_differ.png)
 
+This lead me to choosing the following 6 genres: 
 
+* 50’s
+* Classical
+* Electronic
+* Industrial Pop
+* Rockabilly
+* Spanish
 
+# Base Model for 6 Classifiers
+
+![base_model_6](https://github.com/FinchMF/Classification_Models/blob/master/graphs/base_model_6_cl.png)
