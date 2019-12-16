@@ -60,4 +60,71 @@ Below is a graph showing three genres, Hip Hop, Chill Hop and Detroit Techno, th
 
 # Model Overview
 
-For a base model I used sklearn's Dummy Classifier
+For a base model I used sklearn's Dummy Classifier, which had an Accuracy of 13% with each genre's precision at: 
+
+* 50’s = precision: 0%
+* Chill Hop = precision: 5%
+* Classical = precision: 6%
+* Detroit Techno = precision: 11%
+* Disco = precision: 0%
+* Electronic = precision: 0%
+* French = precision: 0%
+* Hip Hop = precision: 5%
+* Industrial Pop = precision: 8%
+* Post Rock = precision: 27%
+* Rockabilly = precision: 0%
+* Ska = precision: 12%
+* Sleep = precision: 8%
+* Spanish = precision: 25%
+
+Here is the confusion matrix expressing the base model. 
+
+![basemodel_14](https://github.com/FinchMF/Classification_Models/blob/master/graphs/base_model_15_cl.png)
+
+You can see that a 15th classifier appears. This left me wondering if there was any noise in the machine making some tracks unclassifable and being automatically inserted into a default NAN category. More on this when we reach the final model.
+
+Here are the results from each model I tried before concluding that Random Forest with a max depth of 10 was the most accurate model. 
+
+
+* KNN: 
+   * Accuracy: 30%
+
+* Log Regression:
+   * Accuracy: 43%
+
+* Ada Boost:
+  * Trained: 23.3%
+  * Tested: 20.1%
+
+* Gradient Boost: (overfitting)
+  * Trained: 95.8%
+  * Tested: 55.2%
+
+* Random Forest:
+  * Accuracy: 60.4%
+
+* SVM:
+  * Accuracy: 24.5%
+
+
+On most models, the accuracy was too low and the recall/precision often had many classifiers scored at 0%. It was clear that these models were ineffecient and did not learn well. Intially, Random Forest did not reach 60.4%. It was only after tinkering with the max depth that the score jumped up. The final max depth was 10. 
+
+![rndmfrstmxd10](https://github.com/FinchMF/Classification_Models/blob/master/graphs/forest_model_15.png)
+
+Still the ghost classifier was appearing. After investigating further, I arrived at the conclusion that during the Test/Train, Split (which was an 80/20 divide) a NAN column was being generated to receive random tracks that were difficult for the machine to classify. This is something I want to look further into. 
+
+Is it a flaw with Spotify's audio features, a flaw with Random Forest or a flaw with my code? In a future project, I will be sure to unpack the noise in this model. 
+
+# Feature Importance for Random Forest at max depth 10 with 15 Classifiers (including NAN)
+
+![feat_importance](https://github.com/FinchMF/Classification_Models/blob/master/graphs/feature_importance_15.png)
+
+
+# Removing the Noise
+
+Unsatisfied with being able to pinpoint what the noise was, I decided to strip the classifiers from the model that may be causing the noise. I did this by accessing the most distince genre's by looking at the ones that did not overlap that much. An example of instrumentalness between Classical and Electronic below. 
+
+![difference](https://github.com/FinchMF/Classification_Models/blob/master/graphs/2_differ.png)
+
+
+
