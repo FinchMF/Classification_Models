@@ -3,7 +3,7 @@
 # Aim
 For this project I wanted to build a multi-class classification model that could discrimate between multiple generes of music. I wanted to intentionally choose a handful of like genres which shared multiple features as well as distinct generes that shared few if any features. The purpose was to find a classification model that could be used to pinpoint differences between a genre's musical profile and help anaylize what features within the sound that made it unique. 
 
-# Overview
+# Overview of Data
 Using Spotify's API I called 14 different genres. These generes were: 
 
 * 50’s (2)
