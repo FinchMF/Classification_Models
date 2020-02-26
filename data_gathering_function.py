@@ -37,7 +37,7 @@ headers = {'Authorization': 'Bearer '+ access_token}
 
 list_of_genre_ids = ['7Mr3wEdKgaiAP4Cm2a6vda', 
                      '4MRGjKqlWuJZJ8XHOGcqkR', 
-                     '37i9dQZF1DX4dyzvuaRJ0n',
+                     '0hLKYU2Wwv5WTu7XwnesPg',
                      '1o1HVRGIxwCcdSnNnZ69IC',
                      '37i9dQZF1DWWEJlAGA9gs0',
                      '0TCtFMz5lY6jTfusk66ZFj',
