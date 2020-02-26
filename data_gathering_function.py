@@ -430,3 +430,226 @@ def get_global_and_section_info(genre_id):
     print('Global and Section Data Compiled')
     return global_section_info
 
+
+#################################
+# Feature Engineer Function 1.2 #
+#################################
+
+#Now that the dataframe is generated. There are a few more steps necessary before this data can be used.
+
+# 1. Clean dataframe cells so each cell has strings and not lists
+# 2. Transform the Harmonic Progression into Roman Numeral Analysis
+
+# function to convert list of words into string
+def l_to_s(_list):
+    s = ''
+    for i in _list:
+        s = s + i + ','
+    return s[:-2] 
+
+# function to convert list of integers into a string
+def l_to_int(_list):
+    s = ''
+    for i in _list:
+        s = s + str(i) + ','
+    return s[:-2] 
+
+########################################################
+# Make a DataFrame that has All Roman Numeral Analysis #
+########################################################
+
+from harmonic_function import *
+
+def get_all_global_modes(dataframe):
+    global_modes = []
+    for i in dataframe['Track Modes']:
+        global_modes.append(i)
+    return global_modes
+
+def get_all_global_keys(dataframe):
+    global_keys = []
+    for i in dataframe['Track Keys']:
+        global_keys.append(i)
+    return global_keys
+        
+def get_all_harmonic_prog(dataframe):
+    harmonic_prog = []
+    for i in dataframe['Harmonic Progression']:
+        harmonic_prog.append(i)
+    return harmonic_prog
+
+
+def retrieve_roman_numeral_analysis(dataframe):
+    modes = get_all_global_modes(dataframe)
+    keys = get_all_global_keys(dataframe)
+    harmonic_prog = get_all_harmonic_prog(dataframe)
+    analysis = []
+    for i in list(range(len(dataframe))):
+        analysis.append(get_progression_m(modes[i], keys[i], harmonic_prog[i]))
+    return analysis
+
+
+# finding ways to count chords and define a roman numeral analysis's underlaying harmonic structure
+
+def get_harmonic_signature(analysis):
+    duplicate_list = []
+    unique_list = []
+    for i in analysis:
+        if analysis.count(i) > 1:  
+            duplicate_list.append(i)
+        if analysis.count(i) == 1:
+            unique_list.append(i)
+    print('Sonorus Chords')
+    print(set(duplicate_list))
+    print('Coloring Chords')
+    print(unique_list)
+    print('\n')
+    Harmonic_signature = [set(duplicate_list), unique_list]
+    print('Harmonic Signature')
+    return Harmonic_signature    
+
+
+######################
+# HARMONIC SIGNATURE #
+######################
+
+import re
+
+
+
+# function that takes in list of analysis and out puts a list of two lists
+# first list is cleaned and accurate roman numerial anaylsis
+# second list is a numeric conversion to help reduce harmonic categories
+def get_numeric_conversion(list_of_analysis):
+    major_chord_analysis_finder = re.compile('^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$')
+    minor_i_chord_analysis_finder = re.compile('^i$')
+    minor_v_chord_analysis_finder = re.compile('^v$')
+    minor_ii_iv_chord_analysis_finder = re.compile('^i.$')
+    minor_iii_chord_analysis_finder = re.compile('^iii$')
+    minor_vi_chord_analysis_finder = re.compile('^vi$')
+    minor_vii_chord_analysis_finder = re.compile('^vii$')
+    minor_dim_vii_chord_analysis_finder = re.compile('^vii..$')
+    sharp_chord_analysis_finder = re.compile('^#..$')
+    sharp_chord_analysis_finder_ = re.compile('^#...$')
+    flat_chord_analysis_finder = re.compile('^b..$')
+    flat_chord_analysis_finder_ = re.compile('^b...$')
+    new_list_of_analysis = [[] for l in range(len(list_of_analysis))]
+    numerical_conversion = [[] for l in range(len(list_of_analysis))]
+    count = 0
+    for i in list_of_analysis:
+        for a in i:
+            print(count)
+            major_result = re.findall(major_chord_analysis_finder, a)
+            minor_i_result = re.findall(minor_i_chord_analysis_finder, a)
+            minor_v_result = re.findall(minor_v_chord_analysis_finder, a)
+            minor_ii_iv_result = re.findall(minor_ii_iv_chord_analysis_finder, a)
+            minor_iii_result = re.findall(minor_iii_chord_analysis_finder, a)
+            minor_vi_result = re.findall(minor_vi_chord_analysis_finder, a)
+            minor_vii_result = re.findall(minor_vii_chord_analysis_finder, a)
+            minor_dim_vii_result = re.findall(minor_dim_vii_chord_analysis_finder, a)
+            sharp_result = re.findall(sharp_chord_analysis_finder, a)
+            sharp_result_ = re.findall(sharp_chord_analysis_finder_, a)
+            flat_result = re.findall(flat_chord_analysis_finder, a)
+            flat_result_ = re.findall(flat_chord_analysis_finder_, a)
+            if major_result:
+                print("Major Chords found.")
+                print(major_result)
+                new_list_of_analysis[count].append(major_result)
+                numerical_conversion[count].append('1')
+            if minor_i_result:
+                print("Minor Chords found.")	
+                print(minor_i_result)
+                new_list_of_analysis[count].append(minor_i_result)
+                numerical_conversion[count].append('0')
+            if minor_v_result:
+                print(minor_v_result)
+                new_list_of_analysis[count].append(minor_v_result)
+                numerical_conversion[count].append('0')
+            if minor_ii_iv_result:
+                print(minor_ii_iv_result)
+                new_list_of_analysis[count].append(minor_ii_iv_result)
+                numerical_conversion[count].append('0')
+            if minor_iii_result:
+                print(minor_iii_result)
+                new_list_of_analysis[count].append(minor_iii_result)
+                numerical_conversion[count].append('0')
+            if minor_vi_result:
+                print(minor_vi_result)
+                new_list_of_analysis[count].append(minor_vi_result)
+                numerical_conversion[count].append('0')
+            if minor_vii_result:
+                print(minor_vii_result)
+                new_list_of_analysis[count].append(minor_vii_result)
+                numerical_conversion[count].append('0')
+            if minor_dim_vii_result:
+                print(minor_dim_vii_result)
+                new_list_of_analysis[count].append(minor_dim_vii_result)
+                numerical_conversion[count].append('0')
+            if sharp_result:
+                print("Sharp Chords Found")
+                print(sharp_result)
+                new_list_of_analysis[count].append(sharp_result)
+                numerical_conversion[count].append('#')
+            if sharp_result_:
+                print(sharp_result_)
+                new_list_of_analysis[count].append(sharp_result_)
+                numerical_conversion[count].append('#')
+            if flat_result:
+                print('Flat Chords Found')
+                print(flat_result)
+                new_list_of_analysis[count].append(flat_result)
+                numerical_conversion[count].append('b')
+            if flat_result_:
+                print(flat_result_)
+                new_list_of_analysis[count].append(flat_result_)
+                numerical_conversion[count].append('b')
+            else:
+                pass
+        count += 1
+    cleaned_list = [[] for l in range(len(new_list_of_analysis))]
+    count = 0
+    for x in new_list_of_analysis:
+        for i in x:
+            for a in i:
+                if type(a) == tuple:
+                    x = [(tuple(int(x) if x.isdigit() else x for x in _ if x)) for _ in i]
+                    x = ''.join(x[0])
+                    cleaned_list[count].append(x)
+                if type(a) == str:
+                    cleaned_list[count].append(a)
+        count += 1
+    return cleaned_list, numerical_conversion
+
+
+
+# combining the full encoding process into one function
+def encode_shape_and_color(converted):
+    harmonic_signatures = []
+    for i in converted[1]: 
+        x = get_harmonic_signature(i)
+        harmonic_signatures.append(x)
+        harmonic_sig_df = pd.DataFrame(harmonic_signatures)
+        harmonic_sig_df = harmonic_sig_df.rename(columns={0: 'Shape', 1: 'Color'})
+    harmonic_sig_df['Shape'] = harmonic_sig_df['Shape'].apply(lambda x: str(list(x)))
+    harmonic_sig_df['Color'] = harmonic_sig_df['Color'].apply(lambda x: str(list(x)))
+    encoded_shape = pd.get_dummies(harmonic_sig_df['Shape'], prefix = 'Shape')
+    encoded_color = pd.get_dummies(harmonic_sig_df['Color'], prefix = 'Color')
+    # encoded_shape.columns = ['Shape_0', 
+    #                          'Shape_1', 
+    #                          'Shape_2', 
+    #                          'Shape_3', 
+    #                          'Shape_4',
+    #                          'Shape_5',
+    #                          'Shape_6',
+    #                          'Shape_7']
+    # encoded_color.columns = ['Color_0',
+    #                          'Color_1',
+    #                          'Color_2',
+    #                          'Color_3',
+    #                          'Color_4',
+    #                          'Color_5',
+    #                          'Color_6']
+    shape_and_color_df = pd.concat([encoded_shape, 
+                                    encoded_color], 
+                                    axis = 1)
+    return shape_and_color_df
