@@ -261,7 +261,16 @@ def plot_feature_importances(model):
 
 # searching and saving optimized model 
 
-def find_model(df, set_, model, classes):
+def find_model(df, set_, model, classes, name):
+    # setting label for organizing saved models
+    if name == '14':
+        class_ = '14'
+    if name == '10':
+        class_ = '10'
+    if name == '5':
+        class_ = '5'
+    if name == '3':
+        class_ = '3'
     # all features 
     if set_ == 0:
         # set features and target
@@ -299,8 +308,8 @@ def find_model(df, set_, model, classes):
                                   title='Confusion matrix',
                                   cmap=plt.cm.Blues)   
                     
-            filename = './models/KNN_optimized_model.sav'
-            pickle.dump(knn, open(filename, 'wb'))
+            filename = './models/KNN_{}_{}_optimized_model.sav'
+            pickle.dump(knn, open(filename.format(class_, set_), 'wb'))
             print('Optimized Model Saved')
         
         if model == 'Random_Forest':
@@ -322,8 +331,8 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Blues)
-            filename = './models/Random_Forest_non_optimized_model.sav'
-            pickle.dump(forest, open(filename, 'wb'))
+            filename = './models/Random_Forest_{}_{}_non_optimized_model.sav'
+            pickle.dump(forest, open(filename.format(class_, set_), 'wb'))
             print('Non Optimized Model Saved.....Now performing GridSearch for Optimization')
             rf_clf = RandomForestClassifier()
             mean_rf_cv_score = np.mean(cross_val_score(rf_clf, X_train, y_train, cv=10))
@@ -363,8 +372,8 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Purples)
-            filename = './models/Random_Forest_Optimized_model_.sav'
-            pickle.dump(forest, open(filename, 'wb'))
+            filename = './models/Random_Forest_{}_{}_Optimized_model_.sav'
+            pickle.dump(forest, open(filename.format(class_, set_), 'wb'))
             print('Optimized model saved')
 
         if model == 'SVC':
@@ -389,8 +398,8 @@ def find_model(df, set_, model, classes):
                                             title='Confusion matrix',
                                             cmap=plt.cm.Blues)
             print(plot_cm)
-            filename = './models/SVC_Non_Optimized_model.sav'
-            pickle.dump(svclassifier, open(filename, 'wb'))
+            filename = './models/SVC_{}_{}_Non_Optimized_model.sav'
+            pickle.dump(svclassifier, open(filename.format(class_, set_), 'wb'))
             print('Non Optimized Model Saved.....Now performing GridSearch for Optimization')
             # using gridsearch to find optimal parameters
             tuned_parameters = [{'kernel': ['rbf'], 'gamma': [1e-3, 1e-4],
@@ -433,8 +442,8 @@ def find_model(df, set_, model, classes):
             params = clf.best_params_
             tic = time()
             svclassifier = SVC(kernel=params.get('kernel'), 
-                                C=params.get('C'),
-                                gamma=params.get('gamma'))  
+                                C=params.get('C')
+                                )  
             svclassifier.fit(X_train, y_train) 
             preds = svclassifier.predict(X_test)
             toc = time()
@@ -452,8 +461,8 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Purples)
-            filename = './models/SVC_Optimized_model.sav'
-            pickle.dump(svclassifier, open(filename, 'wb'))
+            filename = './models/SVC_{}_{}_Optimized_model.sav'
+            pickle.dump(svclassifier, open(filename.format(class_, set_), 'wb'))
             print('Optimized Model Saved')
         
         if model == 'Logistical Regression':
@@ -472,9 +481,9 @@ def find_model(df, set_, model, classes):
             plot_confusion_matrix(logreg_confusion_matrix, classes,
                                   normalize=False,
                                   title='Confusion matrix',
-                                  cmap=plt.cm.Purples)
-            filename = './models/logreg_non_opitmized.sav'
-            pickle.dump(logreg, open(filename, 'wb'))
+                                  cmap=plt.cm.Blues)
+            filename = './models/logreg_{}_{}_non_opitmized.sav'
+            pickle.dump(logreg, open(filename.format(class_, set_), 'wb'))
             print('Non Optimized Model Saved...Now performing GridSearch for Optimization')
 
             penalty = ['l1', 'l2']
@@ -498,11 +507,11 @@ def find_model(df, set_, model, classes):
                                         penalty = params.get('penalty'), 
                                         solver= params.get('solver'))
             logreg_1.fit(X_train, y_train)
-            pred = logreg_1.predict(X_test)
+            preds = logreg_1.predict(X_test)
             logreg_1_confusion_matrix = confusion_matrix(y_test,preds)
             logreg_1_classification_report = classification_report(y_test,preds)
-            print(logreg_confusion_matrix)
-            print(logreg_classification_report)
+            print(logreg_1_confusion_matrix)
+            print(logreg_1_classification_report)
             print("The accuracy score is" + " "+ str(accuracy_score(y_test, preds)))
             logreg_1_results = list(zip(list(preds), list(y_test)))
             print('\n')
@@ -512,8 +521,8 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Purples)
-            filename = './models/logreg_optimized.sav'
-            pickle.dump(logreg_1, open(filename, 'wb'))
+            filename = './models/logreg_{}_{}_optimized.sav'
+            pickle.dump(logreg_1, open(filename.format(class_, set_), 'wb'))
             print('Optimzed Model Saved')
     
     # only spotify's features
@@ -561,8 +570,8 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Blues)           
-            filename = './models/KNN_optimized_model.sav'
-            pickle.dump(knn, open(filename, 'wb'))
+            filename = './models/KNN_{}_{}_optimized_model.sav'
+            pickle.dump(knn, open(filename.format(class_, set_), 'wb'))
             print('Optimized Model Saved')
         
         if model == 'Random_Forest':
@@ -584,8 +593,8 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Blues)
-            filename = './models/Random_Forest_non_optimized_model.sav'
-            pickle.dump(forest, open(filename, 'wb'))
+            filename = './models/Random_Forest_{}_{}_non_optimized_model.sav'
+            pickle.dump(forest, open(filename.format(class_, set_), 'wb'))
             print('Non Optimized Model Saved.....Now performing GridSearch for Optimization')
             rf_clf = RandomForestClassifier()
             mean_rf_cv_score = np.mean(cross_val_score(rf_clf, X_train, y_train, cv=10))
@@ -625,8 +634,8 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Purples)
-            filename = './models/Random_Forest_Optimized_model_.sav'
-            pickle.dump(forest, open(filename, 'wb'))
+            filename = './models/Random_Forest_{}_{}_Optimized_model_.sav'
+            pickle.dump(forest, open(filename.format(class_, set_), 'wb'))
             print('Optimized model saved')
 
         if model == 'SVC':
@@ -650,8 +659,8 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Blues)
-            filename = './models/SVC_Non_Optimized_model.sav'
-            pickle.dump(svclassifier, open(filename, 'wb'))
+            filename = './models/SVC_{}_{}_Non_Optimized_model.sav'
+            pickle.dump(svclassifier, open(filename.format(class_, set_), 'wb'))
             print('Non Optimized Model Saved.....Now performing GridSearch for Optimization')
             # using gridsearch to find optimal parameters
             tuned_parameters = [{'kernel': ['rbf'], 'gamma': [1e-3, 1e-4],
@@ -694,8 +703,8 @@ def find_model(df, set_, model, classes):
             params = clf.best_params_
             tic = time()
             svclassifier = SVC(kernel=params.get('kernel'), 
-                               C=params.get('C'),
-                               gamma=params.get('gamma') )  
+                               C=params.get('C')
+                               )  
             svclassifier.fit(X_train, y_train) 
             preds = svclassifier.predict(X_test)
             toc = time()
@@ -713,8 +722,8 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Purples)
-            filename = './models/SVC_Optimized_model.sav'
-            pickle.dump(svclassifier, open(filename, 'wb'))
+            filename = './models/SVC_{}_{}_Optimized_model.sav'
+            pickle.dump(svclassifier, open(filename.format(class_, set_), 'wb'))
             print('Optimized Model Saved')
         
         if model == 'Logistical Regression':
@@ -733,9 +742,9 @@ def find_model(df, set_, model, classes):
             plot_confusion_matrix(logreg_confusion_matrix, classes,
                                   normalize=False,
                                   title='Confusion matrix',
-                                  cmap=plt.cm.Purples)
-            filename = './models/logreg_non_opitmized.sav'
-            pickle.dump(logreg, open(filename, 'wb'))
+                                  cmap=plt.cm.Blues)
+            filename = './models/logreg_{}_{}_non_opitmized.sav'
+            pickle.dump(logreg, open(filename.format(class_, set_), 'wb'))
             print('Non Optimized Model Saved...Now performing GridSearch for Optimization')
 
             penalty = ['l1', 'l2']
@@ -759,11 +768,11 @@ def find_model(df, set_, model, classes):
                                           penalty = params.get('penalty'), 
                                           solver= params.get('solver'))
             logreg_1.fit(X_train, y_train)
-            pred = logreg_1.predict(X_test)
+            preds = logreg_1.predict(X_test)
             logreg_1_confusion_matrix = confusion_matrix(y_test,preds)
             logreg_1_classification_report = classification_report(y_test,preds)
-            print(logreg_confusion_matrix)
-            print(logreg_classification_report)
+            print(logreg_1_confusion_matrix)
+            print(logreg_1_classification_report)
             print("The accuracy score is" + " "+ str(accuracy_score(y_test, preds)))
             logreg_1_results = list(zip(list(preds), list(y_test)))
             print('\n')
@@ -773,8 +782,8 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Purples)
-            filename = './models/logreg_optimized.sav'
-            pickle.dump(logreg_1, open(filename, 'wb'))
+            filename = './models/logreg_{}_{}_optimized.sav'
+            pickle.dump(logreg_1, open(filename.format(class_, set_), 'wb'))
             print('Optimzed Model Saved')        
 
     # only engineered features
@@ -823,8 +832,8 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Blues)          
-            filename = './models/KNN_optimized_model.sav'
-            pickle.dump(knn, open(filename, 'wb'))
+            filename = './models/KNN_{}_{}_optimized_model.sav'
+            pickle.dump(knn, open(filename.format(class_, set_), 'wb'))
             print('Optimized Model Saved')
         
         if model == 'Random_Forest':
@@ -846,8 +855,8 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Blues)
-            filename = './models/Random_Forest_non_optimized_model.sav'
-            pickle.dump(forest, open(filename, 'wb'))
+            filename = './models/Random_Forest_{}_{}_non_optimized_model.sav'
+            pickle.dump(forest, open(filename.format(class_, set_), 'wb'))
             print('Non Optimized Model Saved.....Now performing GridSearch for Optimization')
             rf_clf = RandomForestClassifier()
             mean_rf_cv_score = np.mean(cross_val_score(rf_clf, X_train, y_train, cv=10))
@@ -888,8 +897,8 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Purples)
-            filename = './models/Random_Forest_Optimized_model_.sav'
-            pickle.dump(forest, open(filename, 'wb'))
+            filename = './models/Random_Forest_{}_{}_Optimized_model_.sav'
+            pickle.dump(forest, open(filename.format(class_, set_), 'wb'))
             print('Optimized model saved')
 
         if model == 'SVC':
@@ -913,8 +922,8 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Blues)
-            filename = './models/SVC_Non_Optimized_model.sav'
-            pickle.dump(svclassifier, open(filename, 'wb'))
+            filename = './models/SVC_{}_{}_Non_Optimized_model.sav'
+            pickle.dump(svclassifier, open(filename.format(class_, set_), 'wb'))
             print('Non Optimized Model Saved.....Now performing GridSearch for Optimization')
             # using gridsearch to find optimal parameters
             tuned_parameters = [{'kernel': ['rbf'], 'gamma': [1e-3, 1e-4],
@@ -957,8 +966,8 @@ def find_model(df, set_, model, classes):
             params = clf.best_params_
             tic = time()
             svclassifier = SVC(kernel=params.get('kernel'), 
-                               C=params.get('C'),
-                               gamma=params.get('gamma'))  
+                               C=params.get('C')
+                               )  
             svclassifier.fit(X_train, y_train) 
             preds = svclassifier.predict(X_test)
             toc = time()
@@ -976,8 +985,8 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Purples)
-            filename = './models/SVC_Optimized_model.sav'
-            pickle.dump(svclassifier, open(filename, 'wb'))
+            filename = './models/SVC_{}_{}_Optimized_model.sav'
+            pickle.dump(svclassifier, open(filename.format(class_, set_), 'wb'))
             print('Optimized Model Saved')
         
         if model == 'Logistical Regression':
@@ -996,9 +1005,9 @@ def find_model(df, set_, model, classes):
             plot_confusion_matrix(logreg_confusion_matrix, classes,
                                   normalize=False,
                                   title='Confusion matrix',
-                                  cmap=plt.cm.Purples)
-            filename = './models/logreg_non_opitmized.sav'
-            pickle.dump(logreg, open(filename, 'wb'))
+                                  cmap=plt.cm.Blues)
+            filename = './models/logreg_{}_{}_non_opitmized.sav'
+            pickle.dump(logreg, open(filename.format(class_, set_), 'wb'))
             print('Non Optimized Model Saved...Now performing GridSearch for Optimization')
 
             penalty = ['l1', 'l2']
@@ -1022,11 +1031,11 @@ def find_model(df, set_, model, classes):
                                         penalty = params.get('penalty'), 
                                         solver= params.get('solver'))
             logreg_1.fit(X_train, y_train)
-            pred = logreg_1.predict(X_test)
+            preds = logreg_1.predict(X_test)
             logreg_1_confusion_matrix = confusion_matrix(y_test,preds)
             logreg_1_classification_report = classification_report(y_test,preds)
-            print(logreg_confusion_matrix)
-            print(logreg_classification_report)
+            print(logreg_1_confusion_matrix)
+            print(logreg_1_classification_report)
             print("The accuracy score is" + " "+ str(accuracy_score(y_test, preds)))
             logreg_1_results = list(zip(list(preds), list(y_test)))
             print('\n')
@@ -1036,7 +1045,7 @@ def find_model(df, set_, model, classes):
                                   normalize=False,
                                   title='Confusion matrix',
                                   cmap=plt.cm.Purples)
-            filename = './models/logreg_optimized.sav'
-            pickle.dump(logreg_1, open(filename, 'wb'))
+            filename = './models/logreg_{}_{}_optimized.sav'
+            pickle.dump(logreg_1, open(filename.format(class_, set_), 'wb'))
             print('Optimzed Model Saved')        
 
