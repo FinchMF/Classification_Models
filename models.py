@@ -164,16 +164,16 @@ def run_model(df, set_, model, classes):
     if set_ == 2:
         # set features and target
         X = df.drop(['acousticness', 
-                'danceability', 
-                'energy', 
-                'instrumentalness', 
-                'liveness',
-                'loudness',
-                'speechiness',
-                'valence',
-                'Minor', 
-                'Major',
-                'Genre'], axis = 1)
+                     'danceability', 
+                     'energy', 
+                     'instrumentalness', 
+                     'liveness',
+                     'loudness',
+                     'speechiness',
+                     'valence',
+                     'Minor', 
+                     'Major',
+                     'Genre'], axis = 1)
         y = df['Genre']
         # using standardscaler to normalize
         scaler = StandardScaler()
@@ -791,16 +791,16 @@ def find_model(df, set_, model, classes):
     if set_ == 2:
         # set features and target
         X = df.drop(['acousticness', 
-                'danceability', 
-                'energy', 
-                'instrumentalness', 
-                'liveness',
-                'loudness',
-                'speechiness',
-                'valence',
-                'Minor', 
-                'Major',
-                'Genre'], axis = 1)
+                     'danceability', 
+                     'energy', 
+                     'instrumentalness', 
+                     'liveness',
+                     'loudness',
+                     'speechiness',
+                     'valence',
+                     'Minor', 
+                     'Major',
+                     'Genre'], axis = 1)
         y = df['Genre']
         # using standardscaler to normalize
         scaler = StandardScaler()
