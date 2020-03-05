@@ -104,5 +104,9 @@ Here is the confusion matrix expressing the base model.
 ![basemodel_14](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/base_model_15.png)
 
 
+In order to find a model and optimize it, I wrote a script detailing two main functions. Find_Model and Run_Model. 
 
+Find_Model takes in a dataframe, a set of features, the model type and number of classifiers respective to the size of the dataframe. The function uses train/test split and targets genre classifiers with the chosen features. It then executes a base model then uses gridsearch to find an optimized model. The function saves both the non optimzed and optimized model. 
+
+Run_Model takes in a dataframe, a set of features, loads a model and a number of classifiers respective to the dataframe and outputs the model's accuracy score, a classification report, confusion matrix and a list of the model's classification results. 
 
