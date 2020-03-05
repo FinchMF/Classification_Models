@@ -110,8 +110,16 @@ Find_Model takes in a dataframe, a set of features, the model type and number of
 
 Run_Model takes in a dataframe, a set of features, loads a model and a number of classifiers respective to the dataframe and outputs the model's accuracy score, a classification report, confusion matrix and a list of the model's classification results. 
 
-### An Example of Evaluating Random Forest with Find_Model function. 
+### An Example of Evaluating Support Vector Classifier with Find_Model function. 
 
-The intial output of Random Forest with 14 classifiers. 
-![Random_Forest](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/random_forest_15.png)
+The intial output of Linear SVC with 14 classifiers. 
+![SVC](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/SVC_14_non_optimized.png)
+
+The accuracy score @ 0.3319327731092437 is better than the Base Model but still a poor classifier.
+
+Below is a confusion matrix after the GridSearch: 
+
+![SVC_optimized](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/SVC_14_optimized.png)
+
+The accuracy score @ 0.5714285714285714
 
