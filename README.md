@@ -7,11 +7,11 @@ Use data from Spotify's API as well as Engineered Features extrapolated from low
 Using Spotify's API I called 14 different genre playlists. These generes were: 
 
 * 50’s (2)
-* Chill Hop (1)x
 * Classical  (3)
 * Detroit Techno (1)
 * Disco (4)
 * Electronic (4)
+* Electro Indie Pop (4)
 * French (5)
 * Hip Hop (1)
 * Industrial Pop (4)
@@ -110,7 +110,7 @@ Find_Model takes in a dataframe, a set of features, the model type and number of
 
 Run_Model takes in a dataframe, a set of features, loads a model and a number of classifiers respective to the dataframe and outputs the model's accuracy score, a classification report, confusion matrix and a list of the model's classification results. 
 
-### An Example of Evaluating Support Vector Classifier with Find_Model function. 
+### An Example of Evaluating a Support Vector Classifier with Find_Model function. 
 
 The intial output of Linear SVC with 14 classifiers. 
 ![SVC](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/SVC_14_non_optimized.png)
@@ -122,4 +122,7 @@ Below is a confusion matrix after the GridSearch:
 ![SVC_optimized](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/SVC_14_optimized.png)
 
 The accuracy score @ 0.5714285714285714
+
+
+In order to further evaluate the model other than searching for optimal parameters, lets look at the classifiers and see where the model often misclassified. Also, lets look at what features seem to be confusing the model. 
 
