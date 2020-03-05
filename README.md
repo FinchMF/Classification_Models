@@ -1,13 +1,13 @@
-# Genre_Classification_Models
+# Evaluating Classification Models
 
 # Aim
-For this project I wanted to build a multi-class classification model that could discrimate between multiple generes of music. I wanted to intentionally choose a handful of like genres which shared multiple features as well as distinct generes that shared few if any features. The purpose was to find a classification model that could be used to pinpoint differences between a genre's musical profile and help anaylize what features within the sound that made it unique. 
+Use data from Spotify's API as well as Engineered Features extrapolated from lower dimensional Spotify data to train and evaluate classification model performance. 
 
 # Overview of Data
-Using Spotify's API I called 14 different genres. These generes were: 
+Using Spotify's API I called 14 different genre playlists. These generes were: 
 
 * 50’s (2)
-* Chill Hop (1)
+* Chill Hop (1)x
 * Classical  (3)
 * Detroit Techno (1)
 * Disco (4)
@@ -21,7 +21,7 @@ Using Spotify's API I called 14 different genres. These generes were:
 * Sleep (3)
 * Spanish (5)
 
-For each genre I called 100 songs totalling 1,400 tracks. Each track is given a number. Tracks with the same number share common audio features. 
+For each genre 100 tracks, totalling 1,400, were called. Each genre is given a number. Genres with the same number share common audio features. 
 
 # Spotify's Audio Features and Analysis
 
@@ -40,7 +40,7 @@ Spotify returns both high dimesional and low dimensional audio features. The hig
 * Danceability
 * Acousticness
 
-While somewhat inaccurate and in need of improvement, the lower dimensional features are: 
+ The lower dimensional features are: 
 
 * Sections
   * Tempo of Sections 
@@ -49,106 +49,60 @@ While somewhat inaccurate and in need of improvement, the lower dimensional feat
       * Pitch of Segment (note) - (0-11)
       * TImbre of Segment (color) - (0 - 1)
 
-An example of what a genere's musical profile based off the high dimensional features is below. 
-![50's Genre](https://github.com/FinchMF/Classification_Models/blob/master/graphs/EDA_50s_plots_1.png)
+
+## Musical Profile of Genre      
+
+Three examples of a genere's musical profile based off the high dimensional features are below. These examples are chosen because they share similarities and express overt differences. 
+
+
+### 50's Musical Profile
+
+![50's Genre](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/EDA_50s_plots_1.png)
+
+### French Musical Profile
+
+![French Genre](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/EDA_french_plots_2.png)
+
+### Hip Hop Profile
+
+![Hip_Hop Genre](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/EDA_hip_hop_plots_3.png)
+
+
+Between these examples you can see that there is one feature that is common between all of them. The common feature is categorical: Instrumentalness. 
+
+But between features, like Duration and Energy, the genre's differ in their continuous values. The Musical Profile of a genre is a distilled portrait of the sonic spectrum a genre exists within. 
+
 
 # Musical Profiles that share common features
 
-Below is a graph showing three genres, Hip Hop, Chill Hop and Detroit Techno, that all share multiple common audio features. This particular graph is of the audio feature ENERGY and its distribution amoung the tracks within these three genres. 
+Below is a graph showing three genres, Hip Hop, Chill Hop and Detroit Techno, that all share multiple common audio features. This particular graph is of the audio feature ENERGY. In the common feature space, the question is what allows each genre to be 
 
-![Energy Distro](https://github.com/FinchMF/Classification_Models/blob/master/graphs/3_togt.png)
+![Energy Distro](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/3_togt.png)
 
-# Model Overview
+# Model Evaluations
 
-For a base model I used sklearn's Dummy Classifier, which had an Accuracy of 13% with each genre's precision at: 
+   
+Using sklearn's Dummy Classifier, a base model with an Accuracy of 6.7% was achieved with percision scores for each genre below: 
 
-* 50’s = precision: 0%
-* Chill Hop = precision: 5%
-* Classical = precision: 6%
-* Detroit Techno = precision: 11%
-* Disco = precision: 0%
+* 50’s = precision: 9%
+* Classical = precision: 0%
+* Detroit Techno = precision: 0%
+* Disco = precision: 38%
 * Electronic = precision: 0%
+* Electro Indie Pop = precision: 5%
 * French = precision: 0%
-* Hip Hop = precision: 5%
-* Industrial Pop = precision: 8%
-* Post Rock = precision: 27%
+* Hip Hop = precision: 3%
+* Industrial Pop = precision: 14%
+* Post Rock = precision: 0%
 * Rockabilly = precision: 0%
-* Ska = precision: 12%
-* Sleep = precision: 8%
-* Spanish = precision: 25%
+* Ska = precision: 15%
+* Sleep = precision: 18%
+* Spanish = precision: 0%
 
 Here is the confusion matrix expressing the base model. 
 
-![basemodel_14](https://github.com/FinchMF/Classification_Models/blob/master/graphs/base_model_15_cl.png)
-
-You can see that a 15th classifier appears. This left me wondering if there was any noise in the machine making some tracks unclassifable and being automatically inserted into a default NAN category. More on this when we reach the final model.
-
-Here are the results from each model I tried before concluding that Random Forest with a max depth of 10 was the most accurate model. 
+![basemodel_14](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/base_model_15.png)
 
 
-* KNN: 
-   * Accuracy: 30%
-
-* Log Regression:
-   * Accuracy: 43%
-
-* Ada Boost:
-  * Trained: 23.3%
-  * Tested: 20.1%
-
-* Gradient Boost: (overfitting)
-  * Trained: 95.8%
-  * Tested: 55.2%
-
-* Random Forest:
-  * Accuracy: 60.4%
-
-* SVM:
-  * Accuracy: 24.5%
-
-
-On most models, the accuracy was too low and the recall/precision often had many classifiers scored at 0%. It was clear that these models were ineffecient and did not learn well. Intially, Random Forest did not reach 60.4%. It was only after tinkering with the max depth that the score jumped up. The final max depth was 10. 
-
-![rndmfrstmxd10](https://github.com/FinchMF/Classification_Models/blob/master/graphs/forest_model_15.png)
-
-Still the ghost classifier was appearing. After investigating further, I arrived at the conclusion that during the Test/Train, Split (which was an 80/20 divide) a NAN column was being generated to receive random tracks that were difficult for the machine to classify. This is something I want to look further into. 
-
-Is it a flaw with Spotify's audio features, a flaw with Random Forest or a flaw with my code? In a future project, I will be sure to unpack the noise in this model. 
-
-# Feature Importance for Random Forest at max depth 10 with 15 Classifiers (including NAN)
-
-![feat_importance](https://github.com/FinchMF/Classification_Models/blob/master/graphs/feature_importance_15.png)
-
-
-# Removing the Noise
-
-Unsatisfied with being able to pinpoint what the noise was, I decided to strip the classifiers from the model that may be causing the noise. I did this by accessing the most distince genre's by looking at the ones that did not overlap that much. An example of instrumentalness between Classical and Electronic below. 
-
-![difference](https://github.com/FinchMF/Classification_Models/blob/master/graphs/2_differ.png)
-
-This lead me to choosing the following 6 genres: 
-
-* 50’s
-* Classical
-* Electronic
-* Industrial Pop
-* Rockabilly
-* Spanish
-
-# Base Model for 6 Classifiers
-
-![base_model_6](https://github.com/FinchMF/Classification_Models/blob/master/graphs/base_model_6_cl.png)
-
-Notice that the noise is gone. 
-
-The final model is Random Forest at max depth 10 with an accuracy of 80.4%
-
-![random_forest-6](https://github.com/FinchMF/Classification_Models/blob/master/graphs/forest_model_6.png)
-
-# Next Steps
-
- * Collect more data and further analyze where machine learning is less discriminate between like genres with lower dimensional features. 
-
-* In the field of ethnomusicology, use the model to observe and isolate characteristics of a region’s or culture’s musical profile.
 
 
