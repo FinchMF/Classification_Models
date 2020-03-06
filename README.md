@@ -126,3 +126,5 @@ The accuracy score @ 0.5714285714285714
 
 In order to further evaluate the model other than searching for optimal parameters, lets look at the classifiers and see where the model often misclassified. Also, lets look at what features seem to be confusing the model. 
 
+### Engineered Features
+
