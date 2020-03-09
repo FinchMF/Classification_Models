@@ -124,7 +124,16 @@ Below is a confusion matrix after the GridSearch:
 The accuracy score @ 0.5714285714285714
 
 
-In order to further evaluate the model other than searching for optimal parameters, lets look at the classifiers and see where the model often misclassified. Also, lets look at what features seem to be confusing the model. 
+In order to further evaluate the model other than searching for optimal parameters, lets look at the classifiers and see where the model often misclassified. In the print statement of Find_Model, as well as Run_Model functions, you will notice a list of tuples that show the predicted genre and actual genre. In addition to looking at what genres the model misclassified the most, we can also look at what combination of features are effective in training the model and which lessen the trainability. 
 
 ### Engineered Features
+
+For this project, there were three features I engineered. They are abstractions of Spotify's data and an attempt to further depict the form of a song. Using data from 'Audio Features' and 'Audio Analysis' endpoints, I was able to initially generate three depictions of a track's form. 
+
+1. Harmonic Progression
+2. Modal Progression
+3. Tempo Progression
+
+Combining both Harmonic and Modal Progression, I was able to generate categorical features that depicted a Harmonic Signature of a peice. A signature expresses the general shape of harmonic modality as well as isolates unique chords. For this project, I did not make use of the Tempo Progression feature. 
+
 
