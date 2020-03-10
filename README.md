@@ -57,15 +57,15 @@ Three examples of a genere's musical profile based off the high dimensional feat
 
 ### 50's Musical Profile
 
-![50's Genre](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/EDA_50s_plots_1.png)
+![50's Genre](./EDA_50s_plots_1.png)
 
 ### French Musical Profile
 
-![French Genre](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/EDA_french_plots_2.png)
+![French Genre](./EDA_french_plots_2.png)
 
 ### Hip Hop Profile
 
-![Hip_Hop Genre](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/EDA_hip_hop_plots_3.png)
+![Hip_Hop Genre](./EDA_hip_hop_plots_3.png)
 
 
 Between these examples you can see that there is one feature that is common between all of them. The common feature is categorical: Instrumentalness. 
@@ -77,7 +77,7 @@ But between features, like Duration and Energy, the genre's differ in their cont
 
 Below is a graph showing three genres, Hip Hop, Chill Hop and Detroit Techno, that all share multiple common audio features. This particular graph is of the audio feature ENERGY. In the common feature space, the question is what allows each genre to be 
 
-![Energy Distro](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/3_togt.png)
+![Energy Distro](./3_togt.png)
 
 # Model Evaluations
 
@@ -101,7 +101,7 @@ Using sklearn's Dummy Classifier, a base model with an Accuracy of 6.7% was achi
 
 Here is the confusion matrix expressing the base model. 
 
-![basemodel_14](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/base_model_15.png)
+![basemodel_14](./base_model_15.png)
 
 
 In order to find a model and optimize it, I wrote a script detailing two main functions. Find_Model and Run_Model. 
@@ -113,13 +113,13 @@ Run_Model takes in a dataframe, a set of features, loads a model and a number of
 ### An Example of Evaluating a Support Vector Classifier with Find_Model function. 
 
 The intial output of Linear SVC with 14 classifiers. 
-![SVC](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/SVC_14_non_optimized.png)
+![SVC](./SVC_14_non_optimized.png)
 
 The accuracy score @ 0.3319327731092437 is better than the Base Model but still a poor classifier.
 
 Below is a confusion matrix after the GridSearch: 
 
-![SVC_optimized](/Volumes/S190813/Coding/flatiron/Classification_Models/Classification_Models/graphs/SVC_14_optimized.png)
+![SVC_optimized](./SVC_14_optimized.png)
 
 The accuracy score @ 0.5714285714285714
 
