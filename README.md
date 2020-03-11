@@ -136,4 +136,12 @@ For this project, there were three features I engineered. They are abstractions 
 
 Combining both Harmonic and Modal Progression, I was able to generate categorical features that depicted a Harmonic Signature of a peice. A signature expresses the general shape of harmonic modality as well as isolates unique chords. For this project, I did not make use of the Tempo Progression feature. 
 
+## Results of this Experiment
 
+The purpose of this experiment was to evaluate and study machine learning model performance. In the Model_Evaluations.ipynb makes use of the Find_Model method where you'll find various iterations of non-optimized and optimized classification models and varying performance levels based on different combinations of features and number of classifiers. 
+
+## Next Steps
+
+Engineer more features from Spotify's API. Make more combinations of differing classifiers to evaluate where the models are more accurate and more confused. Use more tracks per genere and use the number of tracks as another variable in the evaluations. Include more classification models.
+
+Lastly, do this experiment again, but instead of using Spotify's data, using librosa and other digial signal processing methods to analyze and engineer features directly from the audio.
